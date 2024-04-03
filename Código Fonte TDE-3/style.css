@@ -1,0 +1,141 @@
+/* Adicionando estilos para o novo input e botão */
+#input-section {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#nameInput {
+    padding: 10px;
+    margin-right: 10px;
+}
+
+#submitButton {
+    padding: 10px 20px;
+    background-color: #6495ED;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+#submitButton:hover {
+    background-color: #4169E1;
+}
+
+/* Estilizando a seção de resultados */
+#result-section {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Ajustes para distinguir header, body e footer */
+header {
+    grid-area: header;
+}
+
+main {
+    grid-area: main;
+}
+
+footer {
+    grid-area: footer;
+}
+
+/* Implementando CSS Grid */
+body {
+    display: grid;
+    grid-template-areas: 
+        "header"
+        "main"
+        "footer";
+    min-height: 100vh;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #6495ED;
+    color: #fff;
+    padding: 2%;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 10px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+}
+
+section {
+    background-color: #fff;
+    padding: 2%;
+    margin-bottom: 2%;
+}
+
+section h2 {
+    margin-bottom: 10px;
+}
+
+.images {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.images img {
+    width: 200px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.curiosidades {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.curiosidades-card {
+    background-color: #f0f0f0;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.curiosidades-card h3 {
+    margin-top: 0;
+}
+
+footer {
+    background-color: #808080;
+    color: #fff;
+    padding: 1%;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
