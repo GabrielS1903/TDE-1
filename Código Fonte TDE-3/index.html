@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog sobre a Lamborghini</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Lamborghini</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Curiosidades</a></li>
+                    <li><a href="#">Modelos</a></li>
+                    <li><a href="#">Galeria</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section>
+            <h2>Os Automóveis Lamborghini</h2>
+            <!-- Conteúdo existente -->
+        </section>
+
+        <section>
+            <h2>Galeria de Imagens</h2>
+            <!-- Conteúdo existente -->
+        </section>
+
+        <section class="curiosidades">
+            <h2>Curiosidades sobre a Lamborghini</h2>
+            <!-- Conteúdo existente -->
+        </section>
+
+        <!-- Novo formulário -->
+        <section>
+            <h2>Descubra informações sobre nomes</h2>
+            <form id="nameForm">
+                <label for="nameInput">Digite um nome:</label>
+                <input type="text" id="nameInput" name="name">
+                <button type="button" id="submitButton">Buscar</button>
+            </form>
+            <div id="results" style="display: none;"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; URI - Erechim. Gabriel Renato Schons.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("submitButton").addEventListener("click", function() {
+                var name = document.getElementById("nameInput").value;
+                var resultsDiv = document.getElementById("results");
+
+                fetch("https://api.allorigins.win/get?url=" + encodeURIComponent("https://api.nationalize.io?name=" + name))
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Erro ao carregar os dados');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        var response = JSON.parse(data.contents);
+                        var country = response.country[0]?.country_id;
+                        var probability = response.country[0]?.probability;
+
+                        if (country && probability) {
+                            resultsDiv.innerHTML = "País: " + country + "<br>Probabilidade: " + probability;
+                        } else {
+                            throw new Error('Dados do país não encontrados');
+                        }
+
+                        return fetch("https://api.allorigins.win/get?url=" + encodeURIComponent("https://api.agify.io?name=" + name))
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Erro ao carregar os dados');
+                                }
+                                return response.json();
+                            })
+                            .then(data => {
+                                var response = JSON.parse(data.contents);
+                                var age = response.age;
+                                resultsDiv.innerHTML += "<br>Idade prevista: " + age;
+                            });
+                    })
+                    .then(() => {
+                        resultsDiv.style.display = "block";
+                        document.getElementById("submitButton").style.display = "none";
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                    });
+            });
+        });
+    </script>
+</body>
+</html>
